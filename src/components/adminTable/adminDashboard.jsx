@@ -22,10 +22,10 @@ const AdminDashboard = (props) => {
 
   const handleDelete = async (book) => {
     console.log("BID", book);
-    const newBooks = books.filter((b) => b._id !== book._id);
+    const newBooks = books.filter((b) => b.isbn !== book.isbn);
     setBooks(newBooks);
     try {
-      const result = await bookService.deleteBook(book._id);
+      const result = await bookService.deleteBook(book.isbn);
     } catch (error) {
       console.log(error);
     }
@@ -34,7 +34,7 @@ const AdminDashboard = (props) => {
 
   const handleEdit = (book) => {
     console.log("Edit");
-    props.history.push("/books/update/" + book._id);
+    props.history.push("/books/update/" + book.isbn);
   };
 
   return (
@@ -47,7 +47,7 @@ const AdminDashboard = (props) => {
               className="btn btn-light"
               onClick={() => props.history.push("/newBook")}
             >
-              <i className="icon-plus"></i> Add Record
+              <i className="icon-plus"></i> Add Book
             </button>
 
             <div id="export_buttons" className="mt-2"></div>
@@ -62,11 +62,11 @@ const AdminDashboard = (props) => {
             >
               <thead>
                 <tr>
+                  <th>ISBN</th>
                   <th>Title</th>
-                  <th>Category</th>
                   <th>Author</th>
                   <th>Price</th>
-                  <th>ISBN</th>
+                  <th>Category</th>
                   <th>Status</th>
                   <th className="noExport">Actions</th>
                 </tr>
@@ -74,11 +74,11 @@ const AdminDashboard = (props) => {
               <tbody>
                 {books.map((book, index) => (
                   <tr key={index}>
+                    <td>{book.isbn}</td>
                     <td>{book.title}</td>
-                    <td>{book.category}</td>
                     <td>{book.author}</td>
                     <td>{book.price}</td>
-                    <td>{book.isbn}</td>
+                    <td>{book.category}</td>
                     <td>
                       <span className="badge badge-pill badge-primary">
                         Active
@@ -116,11 +116,11 @@ const AdminDashboard = (props) => {
 
               <tfoot>
                 <tr>
-                  <th>Name</th>
-                  <th>Position</th>
-                  <th>Office</th>
-                  <th>Age</th>
-                  <th>Date</th>
+                  <th>ISBN</th>
+                  <th>Title</th>
+                  <th>Author</th>
+                  <th>Price</th>
+                  <th>Category</th>
                   <th>Status</th>
                   <th>Actions</th>
                 </tr>

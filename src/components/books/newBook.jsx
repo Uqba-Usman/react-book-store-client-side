@@ -12,8 +12,9 @@ import UploadFile from "./uploadFile";
 const NewBook = (props) => {
   const [data, setData] = useState({
     title: "",
-    description: "",
     author: "",
+    edition: "",
+    publisher: "",
     category: "",
     price: "",
     isbn: "",
@@ -39,8 +40,8 @@ const NewBook = (props) => {
       title: Joi.string().required().messages({
         "string.empty": "Title is not allowed to be empty",
       }),
-      description: Joi.string().required().messages({
-        "string.empty": "Description is not allowed to be empty",
+      author: Joi.string().required().messages({
+        "string.empty": "author is not allowed to be empty",
       }),
       author: Joi.string().required().messages({
         "string.empty": "Author is not allowed to be empty",
@@ -53,6 +54,12 @@ const NewBook = (props) => {
       }),
       isbn: Joi.string().required().messages({
         "string.empty": "ISBN is not allowed to be empty",
+      }),
+      edition: Joi.string().required().messages({
+        "string.empty": "Edition is not allowed to be empty",
+      }),
+      publisher: Joi.string().required().messages({
+        "string.empty": "Publisher is not allowed to be empty",
       }),
     }).options({ abortEarly: false });
 
@@ -94,11 +101,12 @@ const NewBook = (props) => {
     const form = new FormData();
     form.append("file", selectedFile);
     form.append("title", data.title);
-    form.append("description", data.description);
     form.append("author", data.author);
     form.append("category", data.category);
     form.append("price", data.price);
     form.append("isbn", data.isbn);
+    form.append("isbn", data.edition);
+    form.append("isbn", data.publisher);
 
     console.log("FORM: ", form);
     axios
@@ -135,18 +143,25 @@ const NewBook = (props) => {
                   label="Title"
                 />
                 <Input
-                  name="description"
-                  value={data.description}
-                  onChange={handleChange}
-                  error={error}
-                  label="Description"
-                />
-                <Input
                   name="author"
                   value={data.author}
                   onChange={handleChange}
                   error={error}
-                  label="Author"
+                  label="author"
+                />
+                <Input
+                  name="edition"
+                  value={data.edition}
+                  onChange={handleChange}
+                  error={error}
+                  label="edition"
+                />
+                <Input
+                  name="publisher"
+                  value={data.publisher}
+                  onChange={handleChange}
+                  error={error}
+                  label="publisher"
                 />
                 <Input
                   name="category"

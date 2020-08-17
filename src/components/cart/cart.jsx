@@ -7,7 +7,9 @@ import Stripe from "../stripe/stripe";
 const cookies = new Cookies();
 
 const Cart = () => {
-  const [data, setData] = React.useState(cookies.get("cart"));
+  const [data, setData] = React.useState(
+    cookies.get("cart") ? cookies.get("cart") : []
+  );
   // const [cookies, setCookie] = useCookies(["cart"]);
 
   const handleButton = () => {
@@ -32,7 +34,7 @@ const Cart = () => {
                 <tr>
                   <th className="cart-product-remove"></th>
                   <th className="cart-product-thumbnail">Product</th>
-                  <th className="cart-product-name">Description</th>
+                  <th className="cart-product-name">Author</th>
                   <th className="cart-product-price">Unit Price</th>
                   <th className="cart-product-subtotal">Total</th>
                 </tr>
@@ -81,7 +83,7 @@ const Cart = () => {
               {/* <Link to="/checkout" className="btn icon-left float-right">
                 <span>Proceed to Checkout</span>
               </Link> */}
-              <Stripe />
+              <Stripe amount={calculateTotal()} />
             </div>
           </div>
         </div>

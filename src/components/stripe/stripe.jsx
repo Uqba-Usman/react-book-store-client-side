@@ -2,11 +2,11 @@ import React from "react";
 import StripeCheckout from "react-stripe-checkout";
 import axios from "axios";
 
-const Stripe = () => {
+const Stripe = ({ amount }) => {
   const [product, setProduct] = React.useState({
-    name: "UUTT",
-    price: 10,
-    productBy: "UUTT",
+    name: "UUTT Book Store",
+    price: Number(amount),
+    productBy: "UUTT Book Store",
   });
 
   const makePayment = (token) => {
@@ -24,6 +24,7 @@ const Stripe = () => {
         console.log("Res", res);
         const { status } = res;
         console.log("Status", status);
+        window.location.href = "/";
       })
       .catch((err) => console.log(err));
   };
@@ -35,7 +36,7 @@ const Stripe = () => {
       amount={product.price * 100}
       shippingAddress
       billingAddress
-      name="Buy React"
+      name="UUTT Book Store"
     >
       <button className="btn">Download</button>
     </StripeCheckout>

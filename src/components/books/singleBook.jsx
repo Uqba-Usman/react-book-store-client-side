@@ -8,10 +8,10 @@ const SingleBook = ({ book }) => {
       <div className="grid-item">
         <div className="product">
           <div className="product-image">
-            <Link to={`/bookDetail/${book._id}`}>
+            <Link to={`/bookDetail/${book.isbn}`}>
               <img src="polo/images/shop/products/1.jpg"></img>
             </Link>
-            <Link to={`/bookDetail/${book._id}`}>
+            <Link to={`/bookDetail/${book.isbn}`}>
               <img src="polo/images/shop/products/10.jpg"></img>
             </Link>
             {/* <span className="product-new">NEW</span> */}
@@ -21,14 +21,14 @@ const SingleBook = ({ book }) => {
               </Link>
             </span>
             <div className="product-overlay">
-              <Link to={`/bookDetail/${book._id}`}>Quick View</Link>
+              <Link to={`/bookDetail/${book.isbn}`}>Quick View</Link>
             </div>
           </div>
           <div className="product-description">
             <div className="product-category">{book.category}</div>
             <div className="product-title">
               <h3>
-                <Link to={`/bookDetail/${book._id}`}>{book.title}</Link>
+                <Link to={`/bookDetail/${book.isbn}`}>{book.title}</Link>
               </h3>
             </div>
             <div className="product-price">
@@ -42,7 +42,10 @@ const SingleBook = ({ book }) => {
               <i className="fa fa-star-half-o"></i>
             </div>
             <div className="product-reviews">
-              <Link to={`/bookDetail/${book._id}`} className="btn btn-coloured">
+              <Link
+                to={`/bookDetail/${book.isbn}`}
+                className="btn btn-coloured"
+              >
                 Buy
               </Link>
             </div>

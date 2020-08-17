@@ -13,7 +13,8 @@ import bookService from "../../services/BookService";
 const UpdateBook = (props) => {
   const [data, setData] = useState({
     title: "",
-    description: "",
+    edition: "",
+    publisher: "",
     author: "",
     category: "",
     price: "",
@@ -51,7 +52,7 @@ const UpdateBook = (props) => {
       .updateBook(id, data)
       .then((res) => {
         console.log("Data Submitted", res);
-        props.history.push("/table");
+        props.history.push("/admin-dashboard");
       })
       .catch((err) => {
         console.log(err);
@@ -76,10 +77,16 @@ const UpdateBook = (props) => {
                   label="Title"
                 />
                 <Input
-                  name="description"
-                  value={data.description}
+                  name="edition"
+                  value={data.edition}
                   onChange={handleChange}
-                  label="Description"
+                  label="edition"
+                />
+                <Input
+                  name="publisher"
+                  value={data.publisher}
+                  onChange={handleChange}
+                  label="publisher"
                 />
                 <Input
                   name="author"

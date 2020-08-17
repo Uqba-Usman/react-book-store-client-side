@@ -51,7 +51,7 @@ const CartProduct = ({ book }) => {
       </td>
       <td className="cart-product-description">
         <p>
-          <span>{book.description}</span>
+          <span>{book.author}</span>
         </p>
       </td>
       <td className="cart-product-price">

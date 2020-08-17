@@ -27,6 +27,7 @@ const BookDetail = (props) => {
       .get("http://localhost:4500/api/books/" + props.match.params.id)
       .then((res) => {
         setBook(res.data);
+        console.log(book);
       })
       .catch((err) => {
         console.log(err);

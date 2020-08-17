@@ -10,7 +10,12 @@ import Joi from "@hapi/joi";
 import Input from "./input";
 
 const Register = (props) => {
-  const [data, setData] = useState({ name: "", email: "", password: "" });
+  const [data, setData] = useState({
+    fName: "",
+    lName: "",
+    email: "",
+    password: "",
+  });
   const [error, setError] = useState();
   console.log("Rendering...");
 
@@ -28,8 +33,11 @@ const Register = (props) => {
 
   const validateData = (data) => {
     const schema = Joi.object({
-      name: Joi.string().required().messages({
+      fName: Joi.string().required().messages({
         "string.empty": "FirstName is not allowed to be empty",
+      }),
+      lName: Joi.string().required().messages({
+        "string.empty": "LastName is not allowed to be empty",
       }),
       email: Joi.string()
         .email({ tlds: { allow: false } })
@@ -59,9 +67,21 @@ const Register = (props) => {
       return;
     }
 
+    // axios
+    //   .post("http://localhost:4500/api/users/register", data)
+    //   .then((res) => {
+    //     props.history.push("/login");
+    //     console.log("Data Submitted", res);
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //     toast.error(err.response.data, {
+    //       position: toast.POSITION.TOP_LEFT,
+    //     });
+    //   });
     console.log("Submitted");
-    axios
-      .post("http://localhost:4500/api/users/register", data)
+    userService
+      .register(data.fName, data.lName, data.email, data.password)
       .then((res) => {
         props.history.push("/login");
         console.log("Data Submitted", res);
@@ -72,6 +92,8 @@ const Register = (props) => {
           position: toast.POSITION.TOP_LEFT,
         });
       });
+
+    console.log("Submitted");
   };
 
   const handleChange = async (e) => {
@@ -97,11 +119,18 @@ const Register = (props) => {
                 </div>
 
                 <Input
-                  name="name"
-                  value={data.name}
+                  name="fName"
+                  value={data.fName}
                   onChange={handleChange}
                   error={error}
-                  label="Name"
+                  label="First Name"
+                />
+                <Input
+                  name="lName"
+                  value={data.lName}
+                  onChange={handleChange}
+                  error={error}
+                  label="Last Name"
                 />
                 <Input
                   name="email"
@@ -124,7 +153,7 @@ const Register = (props) => {
                   <button type="submit" className="btn">
                     Register New Account
                   </button>
-                  <Link to="#" className="btn btn-danger m-l-10">
+                  <Link to="/" className="btn btn-danger m-l-10">
                     Cancel
                   </Link>
                 </div>

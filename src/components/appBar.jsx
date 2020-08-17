@@ -172,7 +172,7 @@ const PrimarySearchAppBar = (props) => {
       <AppBar position="static" className={classes.bar}>
         <Toolbar>
           <Typography className={classes.title} variant="h6" noWrap>
-            Material-UI
+            UUTT
           </Typography>
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
@@ -189,11 +189,11 @@ const PrimarySearchAppBar = (props) => {
             <Typography variant="h6" className={classes.textLink}>
               <Link to="/">Home</Link>
             </Typography>
-            {userService.isAdmin() && (
+            {/* {userService.isAdmin() && (
               <Typography variant="h6" className={classes.textLink}>
                 <Link to="/newBook">New Book</Link>
               </Typography>
-            )}
+            )} */}
             {!userService.isLoggedIn() ? (
               <>
                 <Typography variant="h6" className={classes.textLink}>

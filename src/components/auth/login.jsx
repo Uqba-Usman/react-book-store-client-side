@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import FormField from "./formField";
 import { Link } from "react-router-dom";
 import { withRouter } from "react-router";
+import { toast } from "react-toastify";
 import userService from "./../../services/UserService";
 import Example from "./example";
 import axios from "axios";
@@ -63,16 +64,12 @@ const Login = (props) => {
         console.log("Login", res);
         window.location.href = "/";
       })
-      .catch((err) => console.log("ERROR", err));
-    // axios
-    //   .post("http://localhost:4500/api/users/login", data)
-    //   .then((res) => {
-    //     props.history.push("/");
-    //     console.log("Data Submitted", res);
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
+      .catch((err) => {
+        console.log("ERROR", err);
+        toast.error(err.response.data, {
+          position: toast.POSITION.TOP_LEFT,
+        });
+      });
   };
 
   const handleChange = async (e) => {
