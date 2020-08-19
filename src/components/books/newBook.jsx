@@ -8,6 +8,7 @@ import Joi from "@hapi/joi";
 import TextField from "@material-ui/core/TextField";
 import Input from "./../auth/input";
 import UploadFile from "./uploadFile";
+import bookService from "../../services/BookService";
 
 const NewBook = (props) => {
   const [data, setData] = useState({
@@ -105,12 +106,13 @@ const NewBook = (props) => {
     form.append("category", data.category);
     form.append("price", data.price);
     form.append("isbn", data.isbn);
-    form.append("isbn", data.edition);
-    form.append("isbn", data.publisher);
+    form.append("edition", data.edition);
+    form.append("publisher", data.publisher);
 
     console.log("FORM: ", form);
-    axios
-      .post("http://localhost:4500/api/books", form)
+
+    bookService
+      .addBook(form)
       .then((res) => {
         console.log("Data Submitted", res);
         props.history.push("/");
@@ -147,21 +149,21 @@ const NewBook = (props) => {
                   value={data.author}
                   onChange={handleChange}
                   error={error}
-                  label="author"
+                  label="Author"
                 />
                 <Input
                   name="edition"
                   value={data.edition}
                   onChange={handleChange}
                   error={error}
-                  label="edition"
+                  label="Edition"
                 />
                 <Input
                   name="publisher"
                   value={data.publisher}
                   onChange={handleChange}
                   error={error}
-                  label="publisher"
+                  label="Publisher"
                 />
                 <Input
                   name="category"
